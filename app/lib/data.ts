@@ -43,6 +43,7 @@ export async function fetchLatestInvoices() {
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
+
     return latestInvoices;
   } catch (error) {
     console.error('Database Error:', error);
@@ -135,6 +136,7 @@ export async function fetchInvoicesPages(query: string) {
   `;
 
     const totalPages = Math.ceil(Number(data[0].count) / ITEMS_PER_PAGE);
+
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
@@ -159,6 +161,8 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
+
+    console.log(invoice); // Invoice is an empty array []
 
     return invoice[0];
   } catch (error) {
